@@ -1,0 +1,20 @@
+{
+  "name": "openapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest --ui"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitest/ui": "^0.33.0",
+    "vitest": "^0.33.0"
+  },
+  "dependencies": {
+    "graphql-request": "^6.1.0"
+  }
+}
