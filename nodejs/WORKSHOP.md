@@ -97,7 +97,25 @@ If you are having trouble obtaining the requested output, you can refer to the q
 
 </details>
 
-# Excercice 5: Get all programs with the paginated grid
+# Excercice 5: Get the list of all diffusions related to a theme
+
+On the playground write a query that fetches all diffusions related to the theme [`environnement`](https://www.radiofrance.fr/environnement) of one of the main radio stations of Radio France, such as France Inter or France Culture. This query should return at least 1 element and include the title for each node in the `taxonomiesConnection`.
+
+<details>
+<summary>Hint 1</summary>
+
+Take look at the tutorial [`Filter diffusions by taxonomies`](https://developers.radiofrance.fr/doc/en/tutorial-by-example/taxonomies): use the query `taxonomies` to obtain the identifier of the theme, and then the query `diffusions` to retrieve the diffusions associated with this theme.
+
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+Use the `paths` argument to retrieve the theme identifier instead of paginating through the results of the taxonomy query.
+
+</details>
+
+# Excercice 6: Get all programs with the paginated grid
 
 ## Playground
 

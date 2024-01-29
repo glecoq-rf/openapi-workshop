@@ -4,40 +4,35 @@ import client from './client'
 
 const query = gql`
  # Put your query here
- query($after: String) {
-  paginatedGrid(
-    start: 1688421600
-    end: 1688507999
-    station: FRANCEMUSIQUE
-    includeTracks: true,
-    after: $after
-  ) {
-    cursor
-    node {
-      steps {
+ {
+  diffusions(station: FRANCEINTER, themes: ["25bced2b-e4a8-405c-986a-e0bd5a3fe54f_0"] ) {
+    edges {
+      cursor
+      node {
         id
+        title
+        standFirst
+        url
+        published_date
+        taxonomiesConnection {
+          edges {
+            node {
+              id
+              path
+              title
+            }
+          }
+        }
       }
     }
   }
 }
-
 `
-export const getPaginatedGrid = async () => {
+
+export const getDiffusionsByTaxonomy = async () => {
   /**
    * Put your code here
    */
-  let hasCursor = true;
-  let after = null;
-  let ids = []
-  while (hasCursor) {
-     const {paginatedGrid: {cursor, node: {steps}}} = await client.request(query, {
-      after 
-    })
-
-    ids = [...ids, ...(steps.map(s => s.id))]
-    hasCursor = cursor !== null;
-    after = cursor
-  }
-
-  return ids;
+  let {diffusions} = await client.request(query);
+  return diffusions;
 }

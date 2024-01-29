@@ -3,7 +3,8 @@ import {getBrands} from "../src/exercice-1.js"
 import {getBrandsLocalWeb} from "../src/exercice-2.js"
 import { getScienceCQFD } from '../src/exercice-3.js';
 import { getGrid } from '../src/exercice-4.js';
-import { getPaginatedGrid } from '../src/exercice-5.js';
+import { getDiffusionsByTaxonomy } from '../src/exercice-5.js';
+import { getPaginatedGrid } from '../src/exercice-6.js';
 
 test('Exercice 1', async () => {
 
@@ -75,6 +76,26 @@ test('Exercice 4', async () => {
 });
 
 test('Exercice 5', async () => {
+
+  const diffusions = await getDiffusionsByTaxonomy();
+  const getTaxonomiesFromNode = (node) => {
+    if (!node.taxonomiesConnection || !node.taxonomiesConnection.edges) {
+      return []
+    };
+  
+    return node.taxonomiesConnection.edges.map(taxonomyEdge => taxonomyEdge.node.title);
+  };
+  
+  const taxonomies = diffusions.edges.reduce((acc, edge) => {
+    const node = edge.node;
+
+    return [...acc, ...getTaxonomiesFromNode(node)];
+  }, []);
+
+  expect(taxonomies).toContain("Environnement");
+});
+
+test('Exercice 6', async () => {
 
   expect(new Set(await getPaginatedGrid())).toEqual(new Set(
     [
